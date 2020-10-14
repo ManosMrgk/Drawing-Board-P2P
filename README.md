@@ -9,6 +9,7 @@
 # Features
     Real time rendering of everyone's drawings.
     Private "rooms" such that only those with the correct link can access your drawing session.
+    Touch support.
     Saving your boards as images or json files.
     Loading old boards from json files.
     Dark and Light themes.
