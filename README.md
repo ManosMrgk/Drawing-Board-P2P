@@ -2,7 +2,7 @@
     A canvas sharing app through peer to peer communication.
     Share the same drawing board with your team/classroom online.
 
-![demo_drawing_board](https://user-images.githubusercontent.com/61282494/95985695-8e617180-0e2d-11eb-9dfa-67b427816ce3.png)
+![demo_drawing_board](https://user-images.githubusercontent.com/61282494/95986788-2f9cf780-0e2f-11eb-9638-feea4013ded0.png)
 
 # Features
     Real time rendering of everyone's drawings.
