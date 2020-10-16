@@ -1,6 +1,6 @@
 const socket = io("/");
-const PEN_SIZE = 2;
-const ERASER_SIZE = 40;
+const PEN_SIZE = 4;
+const ERASER_SIZE = 60;
 const canvas = document.getElementById("board");
 canvas.oncontextmenu = function (e) {
     e.preventDefault();
@@ -21,6 +21,7 @@ var canvasColor = "#000000";
 canvas.style["background-color"] = canvasColor;
 context.fillStyle = canvasColor;
 context.fillRect(0, 0, canvas.width, canvas.height);
+context.lineCap = "round";
 canvas.addEventListener("mousedown", onMouseDown, false);
 canvas.addEventListener("mouseup", onMouseUp, false);
 canvas.addEventListener("mousemove", onMouseMove, false);
@@ -40,6 +41,7 @@ canvas.addEventListener("touchmove", function (e) {
         let client_X = e.touches[0].clientX - canvas.offsetLeft;
         let client_Y = e.touches[0].clientY - canvas.offsetTop;
         context.beginPath();
+        context.lineCap = "round";
         context.lineWidth = pensize;
         context.moveTo(prevX, prevY);
         context.lineTo(client_X, client_Y);
@@ -187,6 +189,7 @@ myPeer.on("open", id => {
 });
 
 function setColor(c) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content',  c);
     if (c == canvasColor) {
         pensize = ERASER_SIZE;
     } else {
@@ -197,12 +200,14 @@ function setColor(c) {
 
 function onMouseDown(e) {
     mouseClicked = true;
+    onMouseMove(e);
 }
 
 function onMouseUp(e) {
     mouseClicked = false;
     prevY = null;
     prevX = null;
+    context.beginPath();
 }
 
 function onMouseMove(e) {
@@ -215,13 +220,16 @@ function onMouseMove(e) {
         let client_Y = e.clientY - canvas.offsetTop;
         context.beginPath();
         context.lineWidth = pensize;
+        context.lineCap = "round"
         context.moveTo(prevX, prevY);
         context.lineTo(client_X, client_Y);
 
         context.strokeStyle = color;
         context.stroke();
+        context.beginPath();
+        context.moveTo(client_X,client_Y);
         let color_details = color;
-        let penSize = 2;
+        let penSize = PEN_SIZE;
         if (canvasColor == color) {
             penSize = ERASER_SIZE;
             color_details = "eraser";
@@ -404,6 +412,7 @@ function invertBackgroundColor() {
     // let paint_brush = document.getElementById("brush"); // Did not like it very match..
     // paint_brush.style.fill= newColor; // Changes the color of the brush icon's handle
     color = canvasColor;
+    document.querySelector('meta[name="theme-color"]').setAttribute('content',  canvasColor);
     canvasColor = newColor;
     pensize = PEN_SIZE;
     context.fillStyle = newColor;
