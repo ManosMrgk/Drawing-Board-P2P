@@ -2,7 +2,7 @@
     A canvas sharing app through peer to peer communication.
     Share the same drawing board with your team/classroom online.
 
-# [Click here to try out!](https://drawing-board-p2p.glitch.me/)
+# [Click here to try out!](https://drawing-board-p2p.onrender.com)
 
 ![demo_drawing_board](https://user-images.githubusercontent.com/61282494/95986788-2f9cf780-0e2f-11eb-9638-feea4013ded0.png)
 
